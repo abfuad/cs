@@ -1,0 +1,186 @@
+{# {% extends 'security/login.html.twig' %}
+{% block fullbody %} #}
+{% extends "stud_index.html.twig" %}
+{% block header %}{% endblock %}
+{% block body %}{% endblock %}
+{% block nobody %}
+	<div class="row mt-3">
+		<div class="card col-md-8 m-auto  card-outline text-center">
+			<div class="card-body login-card-body">
+				<h2 class="login-box-msg">
+					<b>
+					Clearance	Annoucement</b>
+				</h2>
+				{% if new %}
+
+
+					<ul class="list-group list-group-light ">
+						<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+							<div>
+								<div class="fw-bold">
+									<h5>
+										<b>Title</b>
+									</h5>
+								</div>
+							</div>
+							<strong class="">
+								<h6>{{new.name|title}}</h6>
+							</strong>
+						</li>
+						<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+							<div>
+								<div class="fw-bold">
+									<h5>
+										<b>StartDate</b>
+									</h5>
+								</div>
+							</div>
+							<h5>
+								<strong class="badge rounded-pill badge-primary">{{new.startAt|date('d-m-Y')}}</strong>
+							</h5>
+						</li>
+						<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+							<div>
+								<div class="fw-bold">
+									<h5>
+										<b>EndDate</b>
+									</h5>
+								</div>
+							</div>
+							<h5>
+								<strong class="badge rounded-pill badge-danger">{{new.endAt|date('d-m-Y')}}</strong>
+							</h5>
+						</li>
+					</ul>
+				{% else %}
+					<h3 class="text-danger">
+						<b>No Annoucement</b>
+					</h3>
+				{% endif %}
+
+			</div>
+
+		</div>
+
+
+		<div class="card col-md-8 mx-auto mt-3  card-outline text-center">
+			<div class="card-header">
+				<form class="form-inline card-title" method="POST">
+					<input type="hidden" name="reason" value="{{new.id}}">
+
+					<div class="input-group ">
+						<input class="form-control" autocomplete="off" name="name" type="search" placeholder="enter Student ID Number" aria-label="Search" required>
+						<div class="input-group-append">
+							<button class=" input-group-text btn  text-primary btn-navbar " type="submit">
+								<i class="fas fa-search"></i>
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+			{% if clearance  and new %}
+				<div class="card-body login-card-body">
+					{# <h2 class="login-box-msg">
+						<b>
+							Student Clearance</b>
+					</h2> #}
+
+					<ul class="list-group list-group-light ">
+						
+							<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+								<div>
+									<div class="fw-bold">
+										<h5>
+											<b>FullName</b>
+										</h5>
+									</div>
+								</div>
+								<strong class="">
+									<h6>
+										{{clearance.student.getFullName|upper}}
+									</h6>
+								</strong>
+							</li>
+							<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+								<div>
+									<div class="fw-bold">
+										<h5>
+											<b>IDNumber</b>
+										</h5>
+									</div>
+								</div>
+								<strong class="">
+									<h6>
+										{{clearance.student.idNumber}}
+									</h6>
+								</strong>
+							</li>
+							<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+								<div>
+									<div class="fw-bold">
+										<h5>
+											<b>Department</b>
+										</h5>
+									</div>
+								</div>
+								<strong class="">
+									<h6>
+										{{clearance.student.department}}
+									</h6>
+								</strong>
+							</li>
+
+						
+					</ul>
+<hr>
+					<ul class="list-group list-group-light ">
+						{% for status in clearance.clearanceStatuses %}
+							<li class="list-group-item d-flex justify-content-around align-items-center border-0">
+								<div>
+									<div class="fw-bold">
+										<h5>
+											<b>{{status.department}}</b>
+										</h5>
+									</div>
+								</div>
+								<strong class="">
+									<h6>
+										{% if status.status == 0 %}
+											<b>
+												<span class="text-primary">Pending</span>
+											</b>
+										{% endif %}
+										{% if status.status == 1 %}
+											<b>
+												<span class="text-success">Approved</span>
+											</b>
+										{% endif %}
+									</h6>
+								</strong>
+							</li>
+
+						{% endfor %}
+
+					</ul>
+
+
+				</div>
+			{% endif %}
+		</div>
+
+	</div>
+{% endblock %}
+{% block footer %}{% endblock %}
+{% block javascripts %}
+	<script>
+		$(function () {
+// Initialize Select2 Elements
+// $('.select2').select2()
+
+// Initialize Select2 Elements
+$('.select2bs4').select2({theme: 'bootstrap4'})
+// $('#dteofBirth').datepicker({format: 'mm-dd-yyyy'})
+});
+	</script>
+
+{% endblock %}

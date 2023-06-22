@@ -1,0 +1,196 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	 Account  index
+
+{% endblock %}
+{% block maintitle %}
+
+	{% trans %}
+	 Account 
+	{% endtrans %}
+{% endblock %}
+{% block noBreadcrumb %}
+	{# <li class="breadcrumb-item ">
+		<a href="{{ path('app_user_info_index') }}">
+			{% trans %}
+			System User
+			{% endtrans %}
+		</a>
+	</li>
+	<li class="breadcrumb-item active">
+		{% trans %}
+		System User List
+		{% endtrans %}
+	</li> #}
+{% endblock %}
+{% block body %}
+	<div class="row">
+		<div class="card col-md card-info card-outline">
+
+
+			<div class="card-body">
+				
+					Total :
+
+					{{ users.getTotalItemCount }}
+					Users
+
+					<table class="table table-bordered table-hover" id="example2">
+						<thead>
+							<tr>
+								<td>
+									#
+
+								</td>
+								<th>
+									{% trans %}
+									Full Name
+									{% endtrans %}
+								</th>
+								<th>
+									{% trans %}
+									Phone
+									{% endtrans %}
+								</th>
+								<th>
+									{% trans %}
+									Department
+									{% endtrans %}
+								</th>
+								{# <th>
+									{% trans %}
+									Salary
+									{% endtrans %}
+								</th> #}
+								<th>
+									{% trans %}
+									Status
+									{% endtrans %}
+								</th>
+
+								<th>
+									{% trans %}
+									Role
+									{% endtrans %}
+								</th>
+								<th>
+									{% trans %}
+									Action
+									{% endtrans %}
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% set i =1 %}
+							{% for user in users %}
+								<tr>
+									<td class="">
+
+										<img class="img-circle img-sm" src="{{ asset('image') }}/{{ 'user.png' }}" alt="IM"></td>
+
+									<td>
+										{{ user.firstName|title }}
+										{{ user.middleName|title }}
+										{{ user.lastName|title }}
+
+									</td>
+									<td>
+										{{ user.phone }}
+									</td>
+									<td>
+										{{ user.department }}
+									</td>
+									
+									<td>
+									
+										{% if "rlspad" in app.user.roles or "System Admin" in app.user.roles %}
+											<form class="d-inline" method="post" action="{{ path('user_action',{'id':user.user.id}) }}" onsubmit="return confirm('Are you sure you want to {{ user.user.isActive ? 'DeActivate':'Activate' }} this User Group?');">
+												<input name="activateUser" value="{{ user.user.isActive ? 0 : 1 }}" hidden>
+												{{ user.user.isActive ?  '<button class=" btn badge badge-danger m-l-10 hidden-sm-down">Deactivate</button>': '<button class="btn badge badge-success m-l-10 hidden-sm-down">Activate</button>' }}
+											</form>
+										{% endif %}
+									</td>
+
+									<td>
+										<span class="">
+											{% for role in user.user.roles %}
+												{% if  role != "ROLE_USER"  or user.user.roles|length ==1 %}
+													<span class="badge badge-default">
+														{{ role }}
+													</span>
+
+												{% endif %}
+
+											{% endfor %}
+
+										</span>
+									</td>
+
+									<td>
+
+
+										{% if "rlspad" in app.user.roles or "System Admin" in app.user.roles %}
+
+											<a href="{{ path('app_user_info_edit', {'id': user.id}) }}" title="Edit This User" class="btn btn-sm btn-warning">
+												<i class="fa fa-edit"></i>
+											</a>
+										{% endif %}
+										{% if "rlspad" in app.user.roles or "System Admin" in app.user.roles %}
+
+											<form class="d-inline" method="post">
+												<input type="hidden" name="cred" value="{{ user.id }}">
+												<button class="btn btn-sm btn-secondary" title="print password">
+													<i class="fa fa-file-pdf"></i>
+												</button>
+											</form>
+										{% endif %}
+									</td>
+
+								</tr>
+								{% set i = i+1 %}
+							{% else %}
+								<tr>
+									<td colspan="8">
+										no records found
+									</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+					<div class="float-right" id="custompaginator">
+						{{ knp_pagination_render(users) }}
+					</div>
+
+				
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(function () { // Initialize Select2 Elements
+$('.select2').select2({theme: 'bootstrap4'});
+
+});
+
+	</script>
+	<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+{% endblock %}

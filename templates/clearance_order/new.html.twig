@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ClearanceOrder{% endblock %}
+
+{% block body %}
+    <h1>Create new ClearanceOrder</h1>
+
+    {{ include('clearance_order/_form.html.twig') }}
+
+    <a href="{{ path('app_clearance_order_index') }}">back to list</a>
+{% endblock %}

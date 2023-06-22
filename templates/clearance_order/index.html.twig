@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClearanceOrder index{% endblock %}
+
+{% block body %}
+    <h1>ClearanceOrder index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>Role</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for clearance_order in clearance_orders %}
+            <tr>
+                <td>{{ clearance_order.id }}</td>
+                <td>{{ clearance_order.name }}</td>
+                <td>{{ clearance_order.code }}</td>
+                <td>{{ clearance_order.description }}</td>
+                <td>{{ clearance_order.role }}</td>
+                <td>{{ clearance_order.createdAt ? clearance_order.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ clearance_order.updatedAt ? clearance_order.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_clearance_order_show', {'id': clearance_order.id}) }}">show</a>
+                    <a href="{{ path('app_clearance_order_edit', {'id': clearance_order.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="8">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_clearance_order_new') }}">Create new</a>
+{% endblock %}

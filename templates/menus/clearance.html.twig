@@ -1,0 +1,80 @@
+{% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad")  or authClearance(app.user) %}
+	<li class="nav-item has-treeview">
+		<a href="#" class="nav-link">
+			<i class="nav-icon fa fa-user-check text-white"></i>
+			<p>
+				{% trans %}
+				Clearance Management
+				{% endtrans %}
+				<i class="right fa fa-angle-left"></i>
+			</p>
+		</a>
+		<ul class="nav nav-treeview">
+		
+		
+			<li class="nav-item">
+				<a href="{{ path('app_student_profile_index') }}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+					<p>
+						{% trans %}
+						Student Profile
+						{% endtrans %}
+					</p>
+				</a>
+			</li>
+			{% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad")  %}
+
+            	<li class="nav-item">
+				<a href="{{path('app_clearance_department_index')}}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+
+					<p>{% trans %}Clearance Dep{% endtrans %}</p>
+				</a>
+			</li>
+			{% endif %}
+			<li class="nav-item">
+				<a href="{{ path('app_clearance_index') }}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+					<p>
+						{% trans %}
+						Clearance Request
+						{% endtrans %}
+					</p>
+				</a>
+			</li>
+			{% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad")   %}
+
+			<li class="nav-item">
+				<a href="{{ path('app_clearance_list') }}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+					<p>
+						{% trans %}
+						Clearance List
+						{% endtrans %}
+					</p>
+				</a>
+			</li>
+			{% endif %}
+{% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad") or getAuth(app.user,"Gate Keeper")    %}
+
+			<li class="nav-item">
+				<a href="{{ path('app_student_check') }}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+					<p>
+						{% trans %}
+						Clearance Check
+						{% endtrans %}
+					</p>
+				</a>
+			</li>
+			{% endif %}
+
+
+		</ul>
+	</li>
+{% endif %}</li>

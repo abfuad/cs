@@ -1,0 +1,24 @@
+{{ form_start(form) }}
+    {# {{ form_widget(form) }} #}
+    <div class="form-group ">
+	<label class="col-sm-5 control-label no-padding-right">{{ form_label(form.student,"Student IdNumber") }}</label>
+	{{ form_widget(form.student,{'attr':{'class':'form-control select2bs4'}}) }}
+<div class="help-block text-danger">{{form_errors(form.student)}}</div>
+</div>
+ <div class="form-group ">
+	<label class="col-sm-5 control-label no-padding-right">{{ form_label(form.name,"issue") }}</label>
+	{{ form_widget(form.name,{'attr':{'class':'form-control'}}) }}
+<div class="help-block text-danger">{{form_errors(form.name)}}</div>
+</div>
+ <div class="form-group ">
+	<label class="col-sm-5 control-label no-padding-right">{{ form_label(form.description) }}</label>
+	{{ form_widget(form.description,{'attr':{'class':'form-control'}}) }}
+<div class="help-block text-danger">{{form_errors(form.description)}}</div>
+</div>
+<div class="form-group ">
+	<label class="col-sm-5 control-label no-padding-right">{{ form_label(form.solved,"is Solved?") }}</label>
+	{{ form_widget(form.solved,{'attr':{'class':'form-control'}}) }}
+<div class="help-block text-danger">{{form_errors(form.solved)}}</div>
+</div>
+    <button class="btn btn-primary float-right">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

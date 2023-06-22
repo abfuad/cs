@@ -1,0 +1,103 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Student Profile
+{% endblock %}
+{% block maintitle %}
+
+	{% trans %}
+	Student Profile
+	{% endtrans %}
+{% endblock %}
+{% block noBreadcrumb %}
+
+	{# <li class="breadcrumb-item ">
+			<a href="{{path('app_user_info_index')}}">{% trans %}User{% endtrans %}</a>
+		</li>
+		<li class="breadcrumb-item active">{% trans %}New User{% endtrans %}</li> #}
+{% endblock %}
+
+{% block body %}
+	<div
+		class="card card-secondary card-outline">
+		{# <div class="card-header">
+		</div> #}
+		<div class="card-body">
+			<div class="table-responsive">
+				<table class="table table-bordered table-hover" id="example2">
+					<thead>
+						<tr>
+							<th>IdNumber</th>
+							<th>FullName</th>
+							<th>Department</th>
+							<th>issue</th>
+
+							<th>Description</th>
+							<th>isSolved</th>
+							<th>CreatedAt</th>
+							<th>RegisteredBy</th>
+							<th>actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% for student_profile in student_profiles %}
+							<tr>
+								<td>{{ student_profile.student.idNumber }}</td>
+								<td>{{ student_profile.student.getFullName|upper }}</td>
+								<td>{{ student_profile.student.department }}</td>
+
+								<td>{{ student_profile.name }}</td>
+								{# <td>{{ student_profile.code }}</td> #}
+								<td>{{ student_profile.description }}</td>
+								<td>
+									{% if student_profile.solved == true %}
+										<span class="badge badge-success">YES</span>
+									{% else %}
+										<span class="badge badge-danger">No</span>
+
+									{% endif %}
+
+								</td>
+								<td>{{ student_profile.createdAt ? student_profile.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+								<td>{{ student_profile.createdBy }}</td>
+								<td>
+									<a href="{{ path('app_student_profile_show', {'id': student_profile.id}) }}">show</a>
+									<a href="{{ path('app_student_profile_edit', {'id': student_profile.id}) }}">edit</a>
+								</td>
+							</tr>
+						{% else %}
+							<tr>
+								<td colspan="10">no records found</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			</div>
+			<a href="{{ path('app_student_profile_new') }}" class="btn btn-info">Create new</a>
+
+		</div>
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(function () { // Initialize Select2 Elements
+$('.select2').select2({theme: 'bootstrap4'});
+
+});
+	</script>
+	<script>
+		$(function () {
+$("#example1").DataTable({"responsive": true, "autoWidth": false});
+$('#example2').DataTable({
+"paging": true,
+"lengthChange": false,
+"searching": true,
+"ordering": true,
+"info": true,
+"autoWidth": true,
+"responsive": false
+});
+});
+	</script>
+
+{% endblock %}

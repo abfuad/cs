@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reason index{% endblock %}
+
+{% block body %}
+    <h1>Reason index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Description</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reason in reasons %}
+            <tr>
+                <td>{{ reason.id }}</td>
+                <td>{{ reason.name }}</td>
+                <td>{{ reason.code }}</td>
+                <td>{{ reason.description }}</td>
+                <td>{{ reason.createdAt ? reason.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ reason.updatedAt ? reason.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_reason_show', {'id': reason.id}) }}">show</a>
+                    <a href="{{ path('app_reason_edit', {'id': reason.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_reason_new') }}">Create new</a>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Clearance Department
+{% endblock %}
+{% block maintitle %}
+
+{% trans %}	  Clearance Department {% endtrans %}
+{% endblock %}
+{% block noBreadcrumb %}
+
+	{# <li class="breadcrumb-item ">
+		<a href="{{path('app_user_info_index')}}">{% trans %}User{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item active">{% trans %}New User{% endtrans %}</li> #}
+{% endblock %}
+
+{% block body %}
+<div class="card card-secondary card-outline" >
+{# <div class="card-header">
+</div> #}
+<div class="card-body">
+
+	<table class="table" id="example2">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Department</th>
+				<th>Role</th>
+				<th>OrderNumber</th>
+				<th>CreatedAt</th>
+				<th>UpdatedAt</th>
+				<th>actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for clearance_department in clearance_departments %}
+				<tr>
+					<td>{{ clearance_department.id }}</td>
+					<td>{{ clearance_department.department }}</td>
+
+					<td>{{ clearance_department.role }}</td>
+					<td>{{ clearance_department.orderNumber }}</td>
+					<td>{{ clearance_department.createdAt ? clearance_department.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>{{ clearance_department.updatedAt ? clearance_department.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+					<td>
+						<a href="{{ path('app_clearance_department_show', {'id': clearance_department.id}) }}">show</a>
+						<a href="{{ path('app_clearance_department_edit', {'id': clearance_department.id}) }}">edit</a>
+					</td>
+				</tr>
+			{% else %}
+				<tr>
+					<td colspan="6">no records found</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<a href="{{ path('app_clearance_department_new') }}" class="btn btn-info">Create new</a>
+    </div>
+</div>
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(function () { // Initialize Select2 Elements
+$('.select2').select2({theme: 'bootstrap4'});
+
+});
+	</script>
+	<script>
+		$(function () {
+$("#example1").DataTable({"responsive": true, "autoWidth": false});
+$('#example2').DataTable({
+"paging": true,
+"lengthChange": false,
+"searching": true,
+"ordering": true,
+"info": true,
+"autoWidth": false,
+"responsive": true
+});
+});
+	</script>
+
+{% endblock %}

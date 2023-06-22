@@ -1,0 +1,20 @@
+<nav class="mt-3">
+	<ul
+		class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+		<!-- Add icons to the links using the .nav-icon class
+																																				               with font-awesome or any other icon font library -->
+		{% if app.user and app.user.isStudent == false %}
+			{% include "menus/user.html.twig" %}
+			{% include "menus/clearance.html.twig" %}
+
+			{# {% include "menus/user.html.twig" %}
+										{% include "menus/student.html.twig" %}
+						
+								{% include "menus/exam.html.twig" %}
+						
+						
+								{% include "menus/setting.html.twig" %} #}
+		{% endif %}
+
+	</ul>
+</nav>

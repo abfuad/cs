@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Clearance Request
+{% endblock %}
+{% block maintitle %}
+
+	{% trans %}
+	Clearance Request
+	{% endtrans %}
+{% endblock %}
+{% block noBreadcrumb %}
+
+	{# <li class="breadcrumb-item ">
+			<a href="{{path('app_user_info_index')}}">{% trans %}User{% endtrans %}</a>
+		</li>
+		<li class="breadcrumb-item active">{% trans %}New User{% endtrans %}</li> #}
+{% endblock %}
+
+{% block body %}
+	<div
+		class="card card-secondary card-outline">
+		{# <div class="card-header">
+		</div> #}
+		<div class="card-body">
+
+			<table class="table table-bordered table-hover" id="example2">
+				<thead>
+					<tr>
+
+						<th>IdNumber</th>
+						<th>FullName</th>
+						<th>Department</th>
+						<th>Status</th>
+
+						<th>actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for clearance in clearances %}
+						<tr>
+							<td>{{ clearance.clearance.student.idNumber }}</td>
+							<td>{{clearance.clearance.student.getFullName|upper }}</td>
+							<td>{{clearance.clearance.student.department }}</td>
+
+							{# <td>{{ clearance.createdAt ? clearance.createdAt|date('Y-m-d H:i:s') : '' }}</td> #}
+							<td>
+								{% if clearance.status == 0 %}
+									<b>
+										<span class="badge badge-info">New</span>
+									</b>
+								{% endif %}
+								{% if clearance.status == 1 %}
+									<b>
+										<span class="badge badge-success">Approved</span>
+									</b>
+								{% endif %}
+								{% if clearance.status == 2 %}
+									<b>
+										<span class="badge badge-danger">Canceled</span>
+									</b>
+								{% endif %}
+							</td>
+							<td>
+							{% if clearance.status == 0 %}
+								<form class="d-inline" method="post" onsubmit="return confirm('Are you sure you want to approve this request?');">
+									<input type="hidden" name="approve" value="{{ clearance.clearance.student.id }}">
+									<input type="hidden" name="clearance" value="{{ clearance.id }}">
+
+									<button class="btn btn-sm btn-success" title="approve">
+										<i class="fa fa-check"></i>
+									</button>
+								</form>
+								{% endif %}
+								{# <form class="d-inline" method="post" onsubmit="return confirm('Are you sure you want to cancel this request?');">
+									<input type="hidden" name="cancel" value="{{ clearance.id }}">
+									<button class="btn btn-sm btn-danger" title="cancel">
+										<i class="fa fa-times"></i>
+									</button>
+								</form> #}
+								{# <a href="{{ path('app_clearance_show', {'id': clearance.id}) }}">show</a>
+																				<a href="{{ path('app_clearance_edit', {'id': clearance.id}) }}">edit</a> #}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="5">no records found</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{# <a href="{{ path('app_clearance_new') }}">Create new</a> #}
+{% endblock %}
+{% block javascripts %}
+	<script>
+		$(function () { // Initialize Select2 Elements
+$('.select2').select2({theme: 'bootstrap4'});
+
+});
+	</script>
+	<script>
+		$(function () {
+$("#example1").DataTable({"responsive": true, "autoWidth": false});
+$('#example2').DataTable({
+"paging": true,
+"lengthChange": false,
+"searching": true,
+"ordering": true,
+"info": true,
+"autoWidth": false,
+"responsive": true
+});
+});
+	</script>
+
+{% endblock %}

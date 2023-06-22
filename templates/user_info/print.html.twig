@@ -1,0 +1,42 @@
+{% extends 'print.html.twig' %}
+
+{% block title %}{{app.request.server.get("SYSTEM_NAME")|title}}
+{% endblock %}
+{% block maintitle %}{{app.request.server.get("SYSTEM_NAME")|title}}
+{% endblock %}
+{% block date %}{% endblock %}
+
+{% block body %}
+				<center>
+					<h3><u>Student Clearance System User Credential</u></h3>
+				</center>
+				<br>
+				<center>
+				<center>
+				<div style="display:block; width:100%">
+					 Full Name
+					<u>{{ user.firstname }}
+						{{ user.middleName }}
+						{{ user.lastname }}</u>
+					<br>
+					Sex
+					<u>{{user.sex }}</u>
+					<br>
+					
+					<br>
+					Username: {{user.user.username }}
+					<br>
+					<br>
+					Password: {{password }}
+					
+				</div>
+
+
+				<br>
+                
+				<div class='sign'>
+					Printed By: &nbsp;<u>{{ app.user }}&nbsp;&nbsp;</u><br>
+					
+					</div>
+				</center>
+		{% endblock %}

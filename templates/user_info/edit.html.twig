@@ -1,0 +1,60 @@
+{# {% extends 'base.html.twig' %}
+
+{% block title %}Edit UserInfo{% endblock %}
+
+{% block body %}
+    <h1>Edit UserInfo</h1>
+
+    {{ include('user_info/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_user_info_index') }}">back to list</a>
+
+    {{ include('user_info/_delete_form.html.twig') }}
+{% endblock %} #}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+{% block maintitle %}
+
+{% trans %}	Edit System User {% endtrans %} {% if user_info.user.isStudent %}
+Student
+{% endif %}
+
+{% endblock %}
+{% block  nobreadcrumb %}
+
+
+	{# <li class="breadcrumb-item ">
+		<a href="{{path('app_user_info_index')}}">{% trans %}User{% endtrans %}</a>
+	</li>
+	<li class="breadcrumb-item active">{% trans %}Edit User{% endtrans %}</li> #}
+{% endblock %}
+{% block body %}
+	<div class="row">
+
+
+    {{ include('user_info/_form.html.twig', {'button_label': 'Update'}) }}
+
+
+	</div>
+{% endblock %}
+{% block javascripts %}
+	<script src="{{asset('assets/plugins/datepicker/js/bootstrap-datepicker.js')}}">
+		<script src="{{ asset('assets/plugins/jquery-inputmask/jquery.inputmask.bundle.js') }}"></script>
+		<script src="{{ asset('assets/plugins/jquery.maskedinput/jquery.maskedinput.min.js') }}"></script>
+	</script>
+	<script>
+		$(function () { // Initialize Select2 Elements
+$('.select2').select2()
+
+// Initialize Select2 Elements
+$('.select2bs4').select2({theme: 'bootstrap4'})
+$('#dteofBirth').datepicker({format: 'mm-dd-yyyy'})
+$('#dteofBirth').datepicker({format: 'mm-dd-yyyy'})
+$(".user_phone").mask("99999?99999");
+});
+	</script>
+
+{% endblock %}

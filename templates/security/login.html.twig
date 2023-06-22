@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>
+			Log in</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta
+		name="viewport" content="width=device-width, initial-scale=1">
+
+		<!-- Font Awesome -->
+		<link
+		rel="stylesheet" href="{{ asset('assets/plugins/fontawesome-free/css/all.min.css') }}">
+		<!-- Ionicons -->
+		<link
+		rel="stylesheet" href="{{asset('assets/plugins/fontawesome/css/all.min.css')}}">
+
+		<!-- icheck bootstrap -->
+		<link
+		rel="stylesheet" href="{{ asset('assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="{{ asset('assets/dist/css/adminlte.min.css') }}">
+		<link
+		href="{{asset('assets/plugins/fontface/OpenSans.css')}}" rel="stylesheet">
+	<!-- Google Font: Source Sans Pro -->
+	</head>
+	<body class="hold-transition login-page">
+		{% block fullbody %}
+        
+			<div class="login-box">
+				<div class="login-logo">
+					<p><a href="{{ path('app_home') }}">
+
+						{{app.request.server.get("SYSTEM_NAME")|upper}}
+						</a></p>
+				</div>
+				{% block body %}
+					<!-- /.login-logo -->
+                    
+					<div class="card">
+						<div class="card-body login-card-body">
+							<p class="login-box-msg">enter username & password to login</p>
+
+							<form action="{{ path('app_login') }}" method="post">
+
+
+								{% if error %}
+									<div class="alert alert-danger alert-dismissible">
+										<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+										<h5>
+											<i class="icon fas fa-ban"></i>
+
+											{{ error.messageKey|trans(error.messageData, 'security') }}</h5>
+									</div>
+								{% endif %}
+
+								{% if app.user %}
+									<div class="mb-3">
+										You are logged in as
+										{{ app.user.username }},
+										<a href="{{ path('app_logout') }}">Logout</a>
+									</div>
+								{% endif %}
+								<div class="input-group mb-4">
+									<input type="text" class="form-control" name="username" placeholder="Username" value="{{ last_username }}" required>
+									<div class="input-group-append">
+										<div class="input-group-text">
+											<span class="fa fa-user"></span>
+										</div>
+									</div>
+								</div>
+
+								<div class="input-group mb-3">
+									<input type="password" class="form-control" placeholder="Password" name="password" required>
+									<div class="input-group-append">
+										<div class="input-group-text">
+											<span class="fas fa-lock"></span>
+										</div>
+									</div>
+								</div>
+								<br/>
+								<div class="row">
+
+									<input
+									type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+
+									<!-- /.col -->
+                                    <div class="col-8"></div>
+									<div class="col-4 float-right">
+										<button type="submit" class="btn btn-success float-right btn-block ml-5">Log In</button>
+									</div>
+									<!-- /.col -->
+								</div>
+
+							</form>
+							<br/>
+							<p class="mb-0">
+        {# <a href="{{ path('app_student_new') }}" class="text-center">Register a new membership</a> #}
+      </p>
+							{# <div class="social-auth-links text-center mb-3">
+        <p>- OR -</p>
+        <a href="#" class="btn btn-block btn-primary">
+          <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
+        </a>
+        <a href="#" class="btn btn-block btn-danger">
+          <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+        </a>
+      </div> #}
+							{# <div class=" float-right">
+
+								<a href="#" class="nav-link">
+									<i class="fa fa-key mr-2"></i>
+									forgot my password
+								</a>
+								<a href="#" class="btn  btn-danger float-right">
+									<i class="fa fa-user-plus mr-2"></i>
+									Signup
+								</a>
+							</div> #}
+
+						</div>
+						<!-- /.login-card-body -->
+					</div>
+				{% endblock %}
+			</div>
+
+		{% endblock %}
+		<!-- /.login-box -->
+
+		<!-- jQuery -->
+		<script src="{{ asset('assets/plugins/jquery/jquery.min.js') }}"></script>
+		<!-- Bootstrap 4 -->
+		<script src="{{ asset('assets/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+		<!-- AdminLTE App -->
+		<script src="{{ asset('assets/dist/js/adminlte.min.js') }}"></script>
+
+	</body>
+</html>

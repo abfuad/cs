@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>OBU Student Clearance Management System</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  {# <link href="{{asset('rapid/assets/img/favicon.png')}}" rel="icon"> #}
+  <link href="{{asset('rapid/assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,400,500,600,700" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{asset('rapid/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+  <link href="{{asset('rapid/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+  <link href="{{asset('rapid/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+  <link href="{{asset('rapid/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+  <link href="{{asset('rapid/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{asset('rapid/assets/css/style.css')}}" rel="stylesheet">
+
+
+</head>
+
+<body>
+
+  <header id="header" class="fixed-top d-flex align-items-center header-transparent">
+    <div class="container d-flex align-items-center">
+
+      <h1 class="logo me-auto"><a href="index.html"><b>ObU Student Clearance  System</b></a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      					{# <img src="{{ asset('image/'~ app.request.server.get("LOGO_NAME"))}}" alt="{{app.request.server.get("SYSTEM_SHORT_NAME")}} Logo" class="brand-image img-circle elevation-3" style="opacity: .8"> #}
+
+       <a href="#" class="logo me-auto"><img src="{{ asset('image/'~ app.request.server.get("LOGO_NAME"))}}" alt="" class="img-fluid"></a>
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+                  <li class=" text-center"><a class="nav-link scrollto   text-primary text-center btn-get-started" href="{{ path('app_student_new')}}"><b>student register</b></a></li>
+
+          <li class=" text-center"><a class="nav-link scrollto   text-danger text-center btn-get-started" href="{{path('app_login')}}"><b>Login</b></a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      
+
+    </div>
+  </header><!-- End Header -->
+{% block body %}
+  <section id="hero" class="clearfix">
+    <div class="container d-flex h-100">
+      <div class="row justify-content-center align-self-center" data-aos="fade-up">
+        <div class="col-md-6 intro-info order-lg-first order-last" data-aos="zoom-in" data-aos-delay="100">
+          <h2>Student Clearance Solutions for<br>  <span>Oda Bultum University!</span></h2>
+          <div>
+            <a href="#about" class="btn-get-started scrollto">more</a>
+          </div>
+        </div>
+
+        <div class="col-lg-6 intro-img order-lg-last order-first" data-aos="zoom-out" data-aos-delay="200">
+          <img src="{{asset('rapid/assets/img/intro-img.svg')}}" alt="" class="img-fluid">
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Hero -->
+
+  <main id="main">
+
+    <section id="about" class="about">
+
+      <div class="container bg-white" data-aos="fade-up">
+        <div class="row bg-white">
+
+          <div class="col-lg-5 col-md-6 bg-white">
+            <div class="about-img bg-white" data-aos="zoom-out" data-aos-delay="100">
+              <img src="{{ asset('image/'~ app.request.server.get("LOGO_NAME"))}}" alt="" class="img-fluid">
+            </div>
+          </div>
+
+          <div class="col-lg-7 col-md-6">
+            <div class="about-content" data-aos="fade-left" data-aos-delay="100">
+              <h2>About Us</h2>
+              {# <h3>Odio sed id eos et laboriosam consequatur eos earum soluta.</h3> #}
+              <p>Oda Bultum University is one of public higher learning institutions in Ethiopia, established in November, 2015. It is located at Chiro town in West Hararghe zone of Oromia National Regional State, Ethiopia. It is located at 325 km southeast of Addis Ababa, the capital city of Ethiopia.  As a public higher learning institution, the University has set itself core responsibilities, with a focus on producing ethical, competent qualified graduates, conducting problem solving researches, and deliver demand driven community services. Currently the University is conducting teaching learning programs organized under seven colleges, two institutes and one school, namely; college of agriculture, college of business and economics, college of natural and computational sciences, college of natural resources and environmental sciences, college of social sciences and humanity, college of health, institute of technology, institute of land administration and surveying, and school of law. Under these colleges and institutes there are 38 undergraduate and 8 postgraduate programs. The University has been conducting researches and technology transfer projects in various discipline by faculty. Moreover the university is working in collaboration with different International; national and regional organization.</p>
+            
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section> 
+
+  </main><!-- End #main -->
+{% endblock %}
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="section-bg">
+   
+
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong>Oda Bultum University</strong>. All Rights Reserved
+      </div>
+     
+    </div>
+  </footer><!-- End  Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{{asset('rapid/assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/aos/aos.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/isotope-layout/isotope.pkgd.min.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+  <script src="{{asset('rapid/assets/vendor/php-email-form/validate.js')}}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{asset('rapid/assets/js/main.js')}}"></script>
+
+</body>
+
+</html>
