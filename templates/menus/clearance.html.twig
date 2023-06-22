@@ -58,6 +58,7 @@
 					</p>
 				</a>
 			</li>
+			
 			{% endif %}
 {% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad") or getAuth(app.user,"Gate Keeper")    %}
 
@@ -68,6 +69,20 @@
 					<p>
 						{% trans %}
 						Clearance Check
+						{% endtrans %}
+					</p>
+				</a>
+			</li>
+			{% endif %}
+			{% if getAuth(app.user,"System Admin") or getAuth(app.user,"rlspad")     %}
+
+			<li class="nav-item">
+				<a href="{{ path('app_reason_index') }}" class="nav-link">
+
+					<i class="fa fa-bars nav-icon"></i>
+					<p>
+						{% trans %}
+						Clearance Annoucement
 						{% endtrans %}
 					</p>
 				</a>
